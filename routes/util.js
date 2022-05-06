@@ -9,7 +9,7 @@ const { rmdirDeepSync } = require("../util/fs");
 const Logger = require("../util/logger/logger");
 const multiparty = require("multiparty");
 const logger = new Logger({ perfix: "[api/util]" });
-/* GET users listing. */
+/* /api/util/image2pdf 将image zip 批量转 pdf */
 router.post("/image2pdf", async function (req, res, next) {
   // 获取form
   var form = new multiparty.Form();
@@ -68,5 +68,47 @@ router.post("/image2pdf", async function (req, res, next) {
     rmdirDeepSync(outputDir);
   });
 });
+/* /api/util/upload/gallery 将image 上传到/root/node-express-server/public/img/my_gallery */
+router.post("/upload/gallery/one", async function (req, res) {
+  // 获取form
+  var form = new multiparty.Form();
+  form.parse(req, async function (err, fields, files) {
+    if (err) {
+      res.sendStatus(403)
+      return;
+    }
+    let [url] = await writeGallery([files.image[0]]);
+    res.send(url);
+  });
+});
+/**
+ * @description: 写入 my_gallery 并返回 url
+ * @param {*} images
+ * @return {*}
+ */
+async function writeGallery(images) {
+  let urls = [];
+  for (const imageFile of images) {
+    // buffer
+    let buf = await fs.readFile(imageFile.path);
+    // 写入文件
+    await fs.writeFile(
+      path.resolve(
+        __dirname,
+        "../public/img/my_gallery",
+        // "/root/node-express-server/public/img/my_gallery",
+        imageFile.originalFilename
+      ),
+      buf
+    );
+    // 删除temp
+    await fs.unlink(imageFile.path);
+    // 创建url
+    const url =
+      "https://bitbw.top/public/img/my_gallery/" + imageFile.originalFilename;
+    urls.push(url);
+  }
+  return urls;
+}
 
 module.exports = router;

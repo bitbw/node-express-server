@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "deploy": "ssh root@bitbw.top && cd  node-express-server && git pull && npm i && pm2 restart www",
     "start": "node ./bin/www"
   },
   "dependencies": {
