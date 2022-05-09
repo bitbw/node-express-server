@@ -28,7 +28,7 @@ app.use("/public", express.static("public", { maxAge: "1d" }));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(logger("dev"));
+app.use(logger(':date[clf] :method :url :status :res[content-length] - :response-time ms'));
 // formdata
 // app.use(formidable());
 app.use(express.json());
