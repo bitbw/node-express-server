@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "deploy": "git pull && npm i && pm2 restart www",
+    "deploy": "git pull && pm2 restart www",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "preupdate": "git add . ",
