@@ -5,7 +5,7 @@ var router = express.Router();
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
-router.get("/tset", function (req, res, next) {
+router.get("/test", function (req, res, next) {
   res.send("test");
 });
 

@@ -9,7 +9,10 @@ const { rmdirDeepSync } = require("../util/fs");
 const Logger = require("../util/logger/logger");
 const multiparty = require("multiparty");
 const logger = new Logger({ perfix: "[api/util]" });
-/* /api/util/image2pdf 将image zip 批量转 pdf */
+/* 
+/api/util/image2pdf 
+将image zip 批量转 pdf
+ */
 router.post("/image2pdf", async function (req, res, next) {
   // 获取form
   var form = new multiparty.Form();
@@ -68,7 +71,12 @@ router.post("/image2pdf", async function (req, res, next) {
     rmdirDeepSync(outputDir);
   });
 });
-/* /api/util/upload/gallery 将image 上传到/root/node-express-server/public/img/my_gallery */
+
+
+/* 
+/api/util/upload/gallery 
+将image 上传到/root/node-express-server/public/img/my_gallery
+ */
 router.post("/upload/gallery/one", async function (req, res) {
   // 获取form
   var form = new multiparty.Form();

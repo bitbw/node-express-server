@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "deploy": "git pull && npm i && pm2 restart www",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "preupdate": "git add . ",
+    "update": "git commit -m",
+    "postupdate": "git pull && git push"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
