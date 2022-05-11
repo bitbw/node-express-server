@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "deploy": "git pull && pm2 restart www",
+    "deploy": "git checkout . && git pull && pm2 restart www",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "preupdate": "git add . ",
     "update": "git commit -m",
-    "postupdate": "git pull && git push"
+    "postupdate": "git pull && git push",
+    "log": "pm2 log www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
