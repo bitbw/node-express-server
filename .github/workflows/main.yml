@@ -22,8 +22,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
+      # set nodejs version
+      - name: set nodejs version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      # check nodejs version
+      - name: check nodejs version
+        run: node -v
+      # ssh link server
       - name: ssh pipeline 3
         uses: cross-the-world/ssh-pipeline@master
         env:
