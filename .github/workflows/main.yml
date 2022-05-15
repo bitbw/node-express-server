@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CICD
 
 # Controls when the workflow will run
 on:
@@ -14,40 +14,40 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  my_job:
+  cicd_job:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      # set nodejs version
-      - name: set nodejs version
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      # check nodejs version
-      - name: check nodejs version
-        run: node -v
-      # ssh link server
-      - name: ssh pipeline 3
-        uses: cross-the-world/ssh-pipeline@master
+      # ssh link remote server and executing script
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
         env:
-          WELCOME: "ssh pipeline"
+          WELCOME: "executing remote ssh commands using password"
           SERVER_HOME: "node-express-server" 
         with:
           host: ${{ secrets.DC_HOST }}
-          user: ${{ secrets.DC_USER }}
-          pass: ${{ secrets.DC_PASS }}
+          username: ${{ secrets.DC_USER }}
+          password: ${{ secrets.DC_PASS }}
+          port: 22
+          envs: WELCOME,SERVER_HOME
           script: |
             echo $WELCOME 
+            echo whoami 
+            whoami  
+            echo git version
+            git  --version 
             echo node version
             node -v
             echo npm version
             npm -v
             cd ~ 
+            echo ~ ls
             ls -la 
+            echo $SERVER_HOME ls
             cd $SERVER_HOME
             ls -la 
-            npm run deploy            
+            npm run deploy  
+         
