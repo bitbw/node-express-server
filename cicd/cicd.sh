@@ -1,0 +1,1 @@
+git checkout . && git pull && pm2 restart www
