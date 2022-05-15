@@ -42,6 +42,10 @@ jobs:
           pass: ${{ secrets.DC_PASS }}
           script: |
             echo $WELCOME 
+            echo node version
+            node -v
+            echo npm version
+            npm -v
             cd ~ 
             ls -la 
             cd $SERVER_HOME
