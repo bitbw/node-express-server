@@ -28,7 +28,7 @@ jobs:
         uses: cross-the-world/ssh-pipeline@master
         env:
           WELCOME: "ssh pipeline"
-          SERVER_HOME: "/root/node-express-server" 
+          SERVER_HOME: "node-express-server" 
         with:
           host: ${{ secrets.DC_HOST }}
           user: ${{ secrets.DC_USER }}
@@ -37,5 +37,6 @@ jobs:
             echo $WELCOME 
             cd ~ 
             ls -la 
-            cd $SERVER_HOME 
+            cd $SERVER_HOME
+            ls -la 
             npm run deploy            
