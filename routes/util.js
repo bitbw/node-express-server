@@ -74,7 +74,7 @@ router.post("/image2pdf", async function (req, res, next) {
 
 
 /* 
-/api/util/upload/gallery 
+/api/util/upload/gallery/one
 将image 上传到/root/node-express-server/public/img/my_gallery
  */
 router.post("/upload/gallery/one", async function (req, res) {
