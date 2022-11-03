@@ -101,6 +101,8 @@ router.get('/haomo/trigger/data', async function (req, res) {
     let datas = orginData[key]
     let options = {}
     Object.keys(req.query).map(key=>{
+      // query 中的 value 都是字符串通过 parseFloat 转一下 
+      // TODO: 后期有需求需要加个统一处理的方法
       options[key] = parseFloat(req.query[key])
     })
     result[key] = await parseHaomoPages(options, datas)
